@@ -1,26 +1,25 @@
-import "package:flutter/material.dart";
-import "package:flutter_application_1/DesignSystem/Components/Buttons/ActionButton/action_button.dart";
-import "package:flutter_application_1/DesignSystem/Components/Buttons/ActionButton/action_button_view_model.dart";
-import "package:flutter_application_1/DesignSystem/Components/InputField/input_text.dart";
-import "package:flutter_application_1/DesignSystem/Components/InputField/input_text_view_model.dart";
-import "package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label.dart";
-import "package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label_view_model.dart";
-import "package:flutter_application_1/views/profile/profile.dart";
-import "package:flutter_application_1/views/register/register.dart";
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/DesignSystem/Components/Buttons/ActionButton/action_button_view_model.dart';
+import 'package:flutter_application_1/DesignSystem/Components/InputField/input_text_view_model.dart';
+import 'package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label.dart';
+import 'package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label_view_model.dart';
+import 'package:flutter_application_1/views/login/login.dart';
 
+import '../../DesignSystem/Components/Buttons/ActionButton/action_button.dart';
+import '../../DesignSystem/Components/InputField/input_text.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  LoginScreen({super.key});
+  RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tela de Login"),
+        title: Text("Tela de Registro"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -76,12 +75,12 @@ class LoginScreen extends StatelessWidget {
             
             
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 LinkedLabel.instantiate(
                   viewModel: LinkedLabelViewModel(
-                    fullText: "Esqueceu a Senha?",   
-                    linkedText: "Esqueceu a Senha?", 
+                    fullText: "Li e aceito os Termos de Serviço",   
+                    linkedText: "Termos de Serviço", 
                     onLinkTap: () {}
                   ),
                 ),
@@ -94,19 +93,14 @@ class LoginScreen extends StatelessWidget {
             ActionButtonViewModel(
               size: ActionButtonSize.large, 
               style: ActionButtonStyle.primary, 
-              text: "Login", 
-              onPressed: () {Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ProfileScreen(),
-            ),
-          );}
+              text: "Registrar", 
+              onPressed: () {}
               ),
             ),
 
             const SizedBox(height: 20,),
 
-            const Text('Não tem uma conta?'),
+            const Text('Já tem uma conta?'),
 
             const SizedBox(height: 20,),
 
@@ -114,12 +108,12 @@ class LoginScreen extends StatelessWidget {
             ActionButtonViewModel(
               size: ActionButtonSize.small, 
               style: ActionButtonStyle.primary, 
-              text: "Registre-se", 
+              text: "Login", 
               onPressed: () {
                 Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => RegisterScreen(),
+              builder: (context) => LoginScreen(),
             ),
           );
               }

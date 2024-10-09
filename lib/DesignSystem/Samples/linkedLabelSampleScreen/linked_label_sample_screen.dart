@@ -25,8 +25,6 @@ class LinkedLabelPage extends StatelessWidget {
                 onLinkTap: () {},
               ),
             ),
-
-
           ],
         ),
       ),

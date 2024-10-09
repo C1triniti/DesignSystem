@@ -6,6 +6,6 @@ class LinkedLabelViewModel {
   LinkedLabelViewModel({
     required this.fullText,
     required this.linkedText,
-    required this.onLinkTap
+    required this.onLinkTap,
   });
 }
