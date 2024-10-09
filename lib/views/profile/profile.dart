@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/DesignSystem/Components/BottomTabBar/bottom_tab_bar.dart';
 import 'package:flutter_application_1/DesignSystem/Components/BottomTabBar/bottom_tab_bar_view_model.dart';
-import 'package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label.dart';
-import 'package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label_view_model.dart';
+
 import 'package:flutter_application_1/DesignSystem/shared/styles.dart';
+import 'package:flutter_application_1/views/login/login.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
-  
-  
+
+
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       const Center(child: Text('Home Page')),
       const Center(child: Text('Messages Page')),
       const Center(child: Text('Label Page')),
-      _buildProfilePage(),
+      _buildProfilePage(context),
     ];
 
     return Scaffold(
@@ -72,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 
-Widget _buildProfilePage(){
+Widget _buildProfilePage(BuildContext context){
   return Column(
     children: [
       const ListTile(
@@ -85,7 +85,7 @@ Widget _buildProfilePage(){
             style: TextStyle(
                   fontFamily: 'Inter',
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
             ),
@@ -94,7 +94,7 @@ Widget _buildProfilePage(){
             style: TextStyle(
                   fontFamily: 'Inter',
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
             ),
@@ -109,7 +109,12 @@ Widget _buildProfilePage(){
 
       const SizedBox(height: 10,),
 
-      _buildLogoutButton()
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          _buildLogoutButton(context),
+        ],
+      ),
 
     ],
   );
@@ -128,22 +133,24 @@ Widget _buildFunctionItem(String name) {
     );
   }
 
-Widget _buildLogoutButton () {
-  return Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            LinkedLabel.instantiate(
-              viewModel: LinkedLabelViewModel(
-                fullText: "logout",
-                linkedText: "logout",
-                onLinkTap: () {
-                  
-                },
-              ),
+  Widget _buildLogoutButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginScreen(),
             ),
-          ],
+          );
+        },
+        child: Text(
+          'Logout',
+          style: paragraph1Regular.copyWith(
+            color: Colors.red,
+          ),
         ),
-      );
+      ),
+    );
 }

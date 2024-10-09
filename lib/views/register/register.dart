@@ -8,12 +8,21 @@ import 'package:flutter_application_1/views/login/login.dart';
 import '../../DesignSystem/Components/Buttons/ActionButton/action_button.dart';
 import '../../DesignSystem/Components/InputField/input_text.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
   RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  bool _termsChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +86,15 @@ class RegisterScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+
+                Checkbox(
+                  value: _termsChecked,
+                 onChanged: (bool? value) {
+                    setState(() {
+                      _termsChecked = value!;
+                    });
+                  },
+                 ),
                 LinkedLabel.instantiate(
                   viewModel: LinkedLabelViewModel(
                     fullText: "Li e aceito os Termos de Serviço",   
@@ -116,7 +134,7 @@ class RegisterScreen extends StatelessWidget {
               builder: (context) => LoginScreen(),
             ),
           );
-              }
+          }
               ),
             ),
 
