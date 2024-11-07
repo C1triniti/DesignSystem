@@ -5,16 +5,26 @@ import "package:flutter_application_1/DesignSystem/Components/InputField/input_t
 import "package:flutter_application_1/DesignSystem/Components/InputField/input_text_view_model.dart";
 import "package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label.dart";
 import "package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label_view_model.dart";
-import "package:flutter_application_1/views/profile/profile.dart";
-import "package:flutter_application_1/views/register/register.dart";
+import "package:flutter_application_1/scenes/login/login_page_router.dart";
+import "package:flutter_application_1/scenes/login/login_service.dart";
+import "package:flutter_application_1/scenes/register/register.dart";
 
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
 
   LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController passwordController = TextEditingController();
+
+  Future <Map<String, dynamic>>? _loginFuture;
 
   @override
   Widget build(BuildContext context) {
@@ -90,19 +100,45 @@ class LoginScreen extends StatelessWidget {
 
             const SizedBox(height: 20,),
         
-            ActionButton.instantiate(viewModel: 
-            ActionButtonViewModel(
+            if (_loginFuture == null)
+            ActionButton.instantiate(viewModel: ActionButtonViewModel(
               size: ActionButtonSize.large, 
               style: ActionButtonStyle.primary, 
-              text: "Login", 
-              onPressed: () {Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ProfileScreen(),
-            ),
-          );}
+              text: 'Login', 
+              onPressed: () {
+                setState(() {
+
+                  _loginFuture = LoginService.fetchLogin(
+                  emailController.text,
+                  passwordController.text,
+                );
+                });
+              }
+              )
+            )
+            else
+              FutureBuilder <Map<String, dynamic>>(
+                future: _loginFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting){
+                    return CircularProgressIndicator();
+                  }
+                  else if (snapshot.hasError){
+                    return Text("Erro");
+                  }
+                  else if (snapshot.hasData){
+                    WidgetsBinding.instance.addPostFrameCallback((_){
+                      LoginRouter.goToProfilePage(context, snapshot.data!);
+                    });
+                    return Container();
+                  }
+                  else {
+                    return Container();
+                  }
+                },
               ),
-            ),
+
+            
 
             const SizedBox(height: 20,),
 
@@ -122,7 +158,7 @@ class LoginScreen extends StatelessWidget {
               builder: (context) => RegisterScreen(),
             ),
           );
-              }
+            }
               ),
             ),
 

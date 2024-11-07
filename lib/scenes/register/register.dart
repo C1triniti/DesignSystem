@@ -3,7 +3,7 @@ import 'package:flutter_application_1/DesignSystem/Components/Buttons/ActionButt
 import 'package:flutter_application_1/DesignSystem/Components/InputField/input_text_view_model.dart';
 import 'package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label.dart';
 import 'package:flutter_application_1/DesignSystem/Components/LinkedLabel/linked_label_view_model.dart';
-import 'package:flutter_application_1/views/login/login.dart';
+import 'package:flutter_application_1/scenes/login/login.dart';
 
 import '../../DesignSystem/Components/Buttons/ActionButton/action_button.dart';
 import '../../DesignSystem/Components/InputField/input_text.dart';
@@ -126,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ActionButtonViewModel(
               size: ActionButtonSize.small, 
               style: ActionButtonStyle.primary, 
-              text: "Login", 
+              text: "Entrar", 
               onPressed: () {
                 Navigator.pushReplacement(
             context,

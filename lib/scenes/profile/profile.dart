@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/DesignSystem/Components/BottomTabBar/bottom_tab_bar.dart';
 import 'package:flutter_application_1/DesignSystem/Components/BottomTabBar/bottom_tab_bar_view_model.dart';
-
 import 'package:flutter_application_1/DesignSystem/shared/styles.dart';
-import 'package:flutter_application_1/views/login/login.dart';
+import 'package:flutter_application_1/scenes/profile/profile_page_router.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -138,12 +137,7 @@ Widget _buildFunctionItem(String name) {
       padding: const EdgeInsets.all(16.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ),
-          );
+          ProfileRouter.goToLoginPage(context);
         },
         child: Text(
           'Logout',
